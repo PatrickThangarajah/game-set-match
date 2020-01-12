@@ -33,7 +33,7 @@ public class User {
         this.password = pw;
         points = 0;
         games = new ArrayList<Game_type>();
-        db.collection("I hate my life").document("this is stupid").set(this);
+        db.collection("Users").document(fname).set(this);
     }
 
     public void addGame(Game_type g){
