@@ -55,8 +55,8 @@ public class QR extends AppCompatActivity {
 
     View.OnClickListener openQrCamera = new View.OnClickListener(){
         public void onClick (View v) {
-            //Intent intent = new Intent(this, BarcodeReaderActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, BarcodeReaderActivity.class);
+            startActivity(intent);
         }
     };
 }
