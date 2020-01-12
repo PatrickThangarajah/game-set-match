@@ -1,7 +1,6 @@
 package com.example.game_set_match;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,6 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialize();
-        setContentView(R.layout.signinfrontend);
 
         setContentView(R.layout.signinfrontend);
         signin =(Button) findViewById(R.id.sign_in);
@@ -38,7 +36,7 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
                 openactivity_sign_up();
             }
         });
-
+        setContentView(R.layout.signinfrontend);
     }
 
     public void initialize(){
