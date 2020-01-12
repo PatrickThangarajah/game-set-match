@@ -17,13 +17,10 @@ import java.util.Map;
 import static android.content.ContentValues.TAG;
 
 public class Game_type {
+    private List<User> listOfUsers;
 
-    private String name;
-    private ArrayList<User> listOfUsers;
-
-    public Game_type(String name, String doc, FirebaseFirestore db){
-        this.name = name;
-        listOfUsers = new ArrayList<User>();
+    public Game_type(String doc, FirebaseFirestore db){
+        listOfUsers = (List<User>) db.collection("GameType").document(doc).get();
         db.collection("GameType").document(doc).set(this);
     }
 
@@ -36,6 +33,5 @@ public class Game_type {
         listOfUsers.remove(u);
     }
 
-    public String getName(){return name;}
-    public ArrayList<User> getListOfUsers(){return listOfUsers;}
+    public List<User> getListOfUsers(){return listOfUsers;}
 }

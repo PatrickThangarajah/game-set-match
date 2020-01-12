@@ -5,6 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -12,25 +15,28 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static android.content.ContentValues.TAG;
 
 public class Game {
-    private int GameId;
+    private String GameId;
     private Date StartTime;
     private Date endTime;
     private User player1;
     private User player2;
+    private User loser;
     private User winner;
     private boolean GameOver;
+    FirebaseFirestore Start = FirebaseFirestore.getInstance();
 
     public Game() {
         // empty constructor
     }
 
     public void StartGame(User player1, User player2) {
-
-        this.GameId = 1; // generate game ID
+        Random r = new Random();
+        this.GameId = Integer.toString(r.nextInt(100) + 1);
         this.StartTime = Calendar.getInstance().getTime();
         this.player1 = player1;
         this.player2 = player2;
@@ -46,7 +52,6 @@ public class Game {
         // this.player2.username = "b";
         // this.GameOver = false;
 
-        FirebaseFirestore Start = FirebaseFirestore.getInstance();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("StartTime", Calendar.getInstance().getTime());
         parameters.put("GameId", GameId);
@@ -54,7 +59,7 @@ public class Game {
         //parameters.put("Player2", player2.username);
         parameters.put("Game Over", GameOver);
 
-        Start.collection("Active_Games").document(Integer.toString(GameId)).set(parameters)
+        Start.collection("Active_Games").document(GameId).set(parameters)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -93,15 +98,30 @@ public class Game {
                         Log.e(TAG,ex.getMessage());
                     }
                 });
+        SetWinner(GameId);
 
     }
 
-    public void SetWinner(int gameId,String winner) {
-        // TODO
-        // winner = winner's username
-        // game = game id
-        // algorithm:
-        //  1. get game from firestore
-        //  2. get winning player based on winner username,
+    public String SetWinner(String gameId) {
+        String winner_username;
+        boolean won = true;
+        if (won) {
+            winner = getUser1();
+            winner_username = winner.getUsername();
+        } else {
+            winner = getUser2();
+            winner_username = winner.getUsername();
+        }
+        updateDatabase();
+        return winner_username;
     }
+
+    public void updateDatabase(){
+        winner.addPoints(15);
+        loser.subtractPoints(10);
+    }
+
+    public User getUser1(){return player1;}
+    public User getUser2(){return player2;}
+
 }
