@@ -11,4 +11,5 @@ public class sign_in extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
     }
+    //private void validate(String userName, String userPassword){}
 }
