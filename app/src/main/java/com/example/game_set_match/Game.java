@@ -70,18 +70,10 @@ public class Game {
         parameters.put("Player2", player2.getUsername());
         parameters.put("Game Over", GameOver);
 
-        Start.collection("Active_Games").document(GameId).set(parameters)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Error writing document", e);
-            }
-        });
+        Start.collection("SeekingPlayers").document(player1.getUsername()).delete();
+        Start.collection("SeekingPlayers").document(player2.getUsername()).delete();
+
+        Start.collection("Active_Games").document(GameId).set(parameters);
 
     }
 

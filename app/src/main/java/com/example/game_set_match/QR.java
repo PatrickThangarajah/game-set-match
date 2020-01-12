@@ -55,6 +55,26 @@ public class QR extends AppCompatActivity {
         // load QR code (google API) into View
 
 
+
+        db.collection("Active_Games").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                for (DocumentSnapshot doc : queryDocumentSnapshots){
+                    if (doc.get("Player1").toString().equals(username) ||
+                            doc.get("Player2").toString().equals(username)
+                    ){
+                        Intent intent = new Intent(getApplicationContext(),Ending_MatchScreen.class);
+                        String opponent = (doc.get("Player1").toString().equals(username)) ?
+                                doc.get("Player2").toString() :
+                                doc.get("Player1").toString();
+                        intent.putExtra("username",username);
+                        intent.putExtra("opponent",opponent);
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
+
         db.collection("Users")
                 .document(username)
                 .get()
@@ -65,24 +85,6 @@ public class QR extends AppCompatActivity {
                 Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
                 db.collection("SeekingPlayers").document(username).set(new HashMap<>());
 
-            }
-        });
-
-        db.collection("Active_Games").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-               for (DocumentSnapshot doc : queryDocumentSnapshots){
-                   if (doc.get("Player1").toString().equals(username) ||
-                       doc.get("Player2").toString().equals(username)
-                   ){
-                       Intent intent = new Intent(getApplicationContext(),Ending_MatchScreen.class);
-                       String opponent = (doc.get("Player1").toString().equals(username)) ?
-                              doc.get("Player2").toString() :
-                              doc.get("Player1").toString();
-                       intent.putExtra("username",username);
-                       intent.putExtra("opponent",opponent);
-                   }
-               }
             }
         });
 
