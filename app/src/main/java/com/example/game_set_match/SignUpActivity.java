@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class SignUpActivity extends AppCompatActivity {
     private Button back;
@@ -52,8 +54,6 @@ public class SignUpActivity extends AppCompatActivity {
                 username=uname.getText().toString();
                 email=mail.getText().toString();
                 password=pw.getText().toString();
-
-                //new User(firstname,lastname,username,email,password);
                 openenter();
             }
         });
@@ -64,7 +64,8 @@ public class SignUpActivity extends AppCompatActivity {
     public void openenter() {
 
          if(!(firstname.equals(""))&&!(lastname.equals(""))&&!(username.equals(""))&&!(email.equals(""))&&!(password.equals(""))){
-            Intent intent = new Intent(this, sign_in.class);
+             new User(firstname,lastname,username,email,password, FirebaseFirestore.getInstance());
+             Intent intent = new Intent(this, sign_in.class);
             startActivity(intent);}
 
     }

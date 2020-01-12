@@ -1,8 +1,20 @@
 package com.example.game_set_match;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import static android.content.ContentValues.TAG;
 
 public class User {
     private String fname;
@@ -20,8 +32,8 @@ public class User {
         this.email = email;
         this.password = pw;
         points = 0;
-        db.collection("Users").add(this);
         games = new ArrayList<Game_type>();
+        db.collection("I hate my life").document("this is stupid").set(this);
     }
 
     public void addGame(Game_type g){

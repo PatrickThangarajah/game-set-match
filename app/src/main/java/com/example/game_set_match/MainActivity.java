@@ -40,8 +40,8 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
     }
 
     public void initialize(){
-        new Game_type("Chess", db);
-        new Game_type("Ping Pong", db);
+        new Game_type("Chess", "Chess", db);
+        new Game_type("Ping Pong", "Ping Pong",db);
     }
     public void openactivity_sign_up() {
         Intent intent = new Intent(this,SignUpActivity.class);
@@ -50,4 +50,15 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
         Intent intent = new Intent(this,sign_in.class);
         startActivity(intent);}
 }
+
+
+/*
+rules_version = '2';
+        service cloud.firestore {
+        match /databases/{database}/documents {
+        match /{document=**} {
+        allow read, write: if false;
+        }
+        }
+        }*/
 
