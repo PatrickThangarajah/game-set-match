@@ -2,7 +2,14 @@ package com.example.game_set_match;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import android.view.View;
+import android.widget.ImageView;
+
+import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +37,7 @@ public class QR extends AppCompatActivity {
                 andSymbol +
                 params.get("data");
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +46,17 @@ public class QR extends AppCompatActivity {
         newUser user = new newUser(); // get logged in user;
         user.username = "test"; // placeholder
 
-
-
+        ImageView qrImageView = findViewById(R.id.ImageView_QR);
+        // load QR code (google API) into View
+        Picasso.get().load(GetQrApiUrl(user.username)).into(qrImageView);
+        // Add click listener
+        qrImageView.setOnClickListener(openQrCamera);
     }
+
+    View.OnClickListener openQrCamera = new View.OnClickListener(){
+        public void onClick (View v) {
+            //Intent intent = new Intent(this, BarcodeReaderActivity.class);
+            //startActivity(intent);
+        }
+    };
 }
