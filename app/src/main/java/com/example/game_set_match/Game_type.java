@@ -1,29 +1,33 @@
 package com.example.game_set_match;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Game_type {
 
     private String name;
-    private List leaderboard;
-    private List<User> users;
+    private FirebaseFirestore db;
+    private ArrayList<User> listOfUsers;
 
-    public Game_type(String name, List leaderboard){
+    public Game_type(String name, FirebaseFirestore db){
         this.name = name;
-        this.leaderboard = leaderboard;
-        users = new ArrayList<>();
+        this.db = db;
+        this.db.collection("GameType").add(this);
     }
 
+
     public void addUser(User u){
-        users.add(u);
+        listOfUsers.add(u);
     }
 
     public void deleteUser(User u){
-        users.remove(u);
+        listOfUsers.remove(u);
     }
 
     public String getName(){return name;}
-    public List getLeaderboard(){return leaderboard;}
-    public List<User> getUsers(){return users;}
+    public ArrayList<User> getListOfUsers(){return listOfUsers;}
 }
