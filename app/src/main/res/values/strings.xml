@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">game-set-match</string>
+    <string name="Timer">00:00</string>
 </resources>

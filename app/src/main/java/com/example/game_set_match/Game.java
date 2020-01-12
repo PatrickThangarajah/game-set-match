@@ -1,5 +1,4 @@
 package com.example.game_set_match;
-
 import android.nfc.Tag;
 import android.util.Log;
 import androidx.annotation.NonNull;
