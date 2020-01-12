@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -59,6 +60,12 @@ public class QR extends AppCompatActivity {
         db.collection("Active_Games").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if(queryDocumentSnapshots.isEmpty())
+                {
+                    while(true){
+                        Log.v("app","hello");
+                    }
+                };
                 for (DocumentSnapshot doc : queryDocumentSnapshots){
                     if (doc.get("Player1").toString().equals(username) ||
                             doc.get("Player2").toString().equals(username)
