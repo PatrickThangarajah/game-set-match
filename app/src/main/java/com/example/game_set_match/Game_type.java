@@ -10,13 +10,11 @@ import java.util.Map;
 public class Game_type {
 
     private String name;
-    private FirebaseFirestore db;
     private ArrayList<User> listOfUsers;
 
     public Game_type(String name, FirebaseFirestore db){
         this.name = name;
-        this.db = db;
-        this.db.collection("GameType").add(this);
+        db.collection("GameType").add(this);
     }
 
 
