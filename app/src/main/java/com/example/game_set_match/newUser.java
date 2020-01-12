@@ -1,6 +1,10 @@
 package com.example.game_set_match;
 
-public class newUser {
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class newUser extends AppCompatActivity {
     String fname;
     String lname;
     String username;
@@ -21,5 +25,13 @@ public class newUser {
 
     public void setemail(String email){
         this.username = email;
+    }
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
     }
 }
