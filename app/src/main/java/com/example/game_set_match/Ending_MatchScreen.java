@@ -10,17 +10,17 @@ import android.widget.Switch;
 
 public class Ending_MatchScreen extends AppCompatActivity {
     private Button exit;
-    private Switch switch;
+    private Switch widget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ending__match_screen);
         this.exit = (Button) findViewById(R.id.endButton1);
-        this.switch = (Switch) findViewById(R.id.switch1);
+        this.widget = (Switch) findViewById(R.id.switch1);
         exit.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                new Gsme().EndGame(getIntent().getStringExtra("username"));
+                new Game().EndGame(getIntent().getStringExtra("username"));
 
                 goToQR();
             }
