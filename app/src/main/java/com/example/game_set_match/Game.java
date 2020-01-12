@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Calendar;
@@ -80,9 +81,25 @@ public class Game {
     public void EndGame(String username) {
         final Map<String, Object> params = new HashMap<>();
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Active_Games").whereEqualTo("Player1",username).get();
-        db.collection("Active_Games").whereEqualTo("Player2",username);
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Active_Games").whereEqualTo("Player1",username).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (DocumentSnapshot d : queryDocumentSnapshots){
+                            db.collection("Active_Games").document(d.getId().toString()).delete();
+                        }
+                    }
+                });
+        db.collection("Active_Games").whereEqualTo("Player2",username).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (DocumentSnapshot d : queryDocumentSnapshots){
+                            db.collection("Active_Games").document(d.getId().toString()).delete();
+                        }
+                    }
+                });
     }
 
     public String SetWinner(String gameId) {
