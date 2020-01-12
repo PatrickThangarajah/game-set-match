@@ -6,17 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 
 public class Ending_MatchScreen extends AppCompatActivity {
     private Button exit;
+    private Switch switch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ending__match_screen);
         this.exit = (Button) findViewById(R.id.endButton1);
+        this.switch = (Switch) findViewById(R.id.switch1);
         exit.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+                new Gsme().EndGame(getIntent().getStringExtra("username"));
+
                 goToQR();
             }
         });

@@ -77,32 +77,12 @@ public class Game {
 
     }
 
-    public void EndGame(int gid) {
+    public void EndGame(String username) {
         final Map<String, Object> params = new HashMap<>();
 
-        params.put("GameOver",true);
-        params.put("EndTime",Calendar.getInstance().getTime());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("Active_Games")
-                .document(Integer.toString(gid))
-                .set(params, SetOptions.merge())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //GameObject.GameOver = params.get("GameOver");
-                        //this.EndTime = params.get("EndTime");
-                        // go to winner screen
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception ex) {
-                        Log.e(TAG,ex.getMessage());
-                    }
-                });
-        SetWinner(GameId);
-
+        db.collection("Active_Games").whereEqualTo("Player1",username).get();
+        db.collection("Active_Games").whereEqualTo("Player2",username);
     }
 
     public String SetWinner(String gameId) {
