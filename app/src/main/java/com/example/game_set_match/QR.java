@@ -46,9 +46,7 @@ public class QR extends AppCompatActivity {
         setContentView(R.layout.activity_qr);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-        // placeholder
-        String username = "user1";
+        String username = getIntent().getStringExtra("username");
 
         final ImageView qrImageView = findViewById(R.id.ImageView_QR);
         qrImageView.setOnClickListener(openQrCamera);
@@ -61,11 +59,10 @@ public class QR extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User user = docToUser(documentSnapshot);
                 Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
-
+                
             }
         });
-        //Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
-        // Add click listener
+
     }
 
     private User docToUser(DocumentSnapshot d) {

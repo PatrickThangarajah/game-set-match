@@ -42,8 +42,8 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
     }
 
     public void initialize(){
-        new Game_type("Chess", db);
-        new Game_type("Ping Pong",db);
+        //new Game_type("Chess", db);
+        //new Game_type("Ping Pong",db);
     }
     public void openactivity_sign_up() {
         Intent intent = new Intent(this,SignUpActivity.class);

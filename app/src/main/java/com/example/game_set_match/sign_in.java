@@ -40,15 +40,10 @@ public class sign_in extends AppCompatActivity {
 
                         DocumentSnapshot documentSnapshot = task.getResult();
 
-                        String x1 = Boolean.toString(documentSnapshot.exists());
-                        String x2 = documentSnapshot.get("pw").toString();
-                        String x3 = username;
-                        String x4 = pass;
-                        String x5 = Boolean.toString(documentSnapshot.get("pw").toString().equals(pass));
-
                         if (documentSnapshot.exists() &&
                                 documentSnapshot.get("pw").toString().equals(pass)) {
                             Intent intent = new Intent(getApplicationContext(),QR.class);
+                            intent.putExtra("username",username);
                             startActivity(intent);
                         }
                     }
