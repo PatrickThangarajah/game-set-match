@@ -44,13 +44,17 @@ public class QR extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        String username = getIntent().getStringExtra("username");
+        final String username = getIntent().getStringExtra("username");
 
         final ImageView qrImageView = findViewById(R.id.ImageView_QR);
         qrImageView.setOnClickListener(openQrCamera);
         // load QR code (google API) into View
+
+
+
+
         db.collection("Users")
                 .document(username)
                 .get()
@@ -59,7 +63,9 @@ public class QR extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 User user = docToUser(documentSnapshot);
                 Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
-                
+                db.collection("SeekingPlayers").document(username).set(new HashMap<>());
+
+
             }
         });
 

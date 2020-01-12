@@ -34,6 +34,25 @@ public class Game {
         // empty constructor
     }
 
+
+    public void StartGame(final String username1, final String username2){
+
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Users").document(username1).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(final DocumentSnapshot documentSnapshot1) {
+                        db.collection("Users").document(username2).get()
+                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot2) {
+                                        StartGame(docToUser(documentSnapshot1),docToUser(documentSnapshot2));
+                                    }
+                                });
+                    }
+                });
+    }
+
     public void StartGame(User player1, User player2) {
         Random r = new Random();
         this.GameId = Integer.toString(r.nextInt(100) + 1);
@@ -44,19 +63,11 @@ public class Game {
         this.GameOver = false;
 
 
-
-        // figure out how to store this into a new document on firebase;
-        // this.gameId = -1;
-        // this.StartTime = ;
-        // this.player1.username = "a";
-        // this.player2.username = "b";
-        // this.GameOver = false;
-
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("StartTime", Calendar.getInstance().getTime());
         parameters.put("GameId", GameId);
-        //parameters.put("Player1", player1.username);
-        //parameters.put("Player2", player2.username);
+        parameters.put("Player1", player1.getUsername());
+        parameters.put("Player2", player2.getUsername());
         parameters.put("Game Over", GameOver);
 
         Start.collection("Active_Games").document(GameId).set(parameters)
@@ -124,4 +135,13 @@ public class Game {
     public User getUser1(){return player1;}
     public User getUser2(){return player2;}
 
+
+    private User docToUser(DocumentSnapshot d) {
+        return new User(
+                d.get("fname").toString(),
+                d.get("lname").toString(),
+                d.get("username").toString(),
+                d.get("email").toString(),
+                d.get("pw").toString());
+    }
 }
