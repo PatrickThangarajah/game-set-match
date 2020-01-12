@@ -1,5 +1,6 @@
 package com.example.game_set_match;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,15 +11,16 @@ import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class QR extends AppCompatActivity {
-
-    private String username;
     private String GetQrApiUrl(String username) {
         return GetQrApiUrl(username,500,500);
     }
@@ -48,12 +50,9 @@ public class QR extends AppCompatActivity {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         final String username = getIntent().getStringExtra("username");
-
         final ImageView qrImageView = findViewById(R.id.ImageView_QR);
         qrImageView.setOnClickListener(openQrCamera);
         // load QR code (google API) into View
-
-        this.username = username;
 
 
         db.collection("Users")
@@ -66,7 +65,24 @@ public class QR extends AppCompatActivity {
                 Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
                 db.collection("SeekingPlayers").document(username).set(new HashMap<>());
 
+            }
+        });
 
+        db.collection("Active_Games").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+               for (DocumentSnapshot doc : queryDocumentSnapshots){
+                   if (doc.get("Player1").toString().equals(username) ||
+                       doc.get("Player2").toString().equals(username)
+                   ){
+                       //Intent intent = new Intent(this,Ending_MatchScreen.class);
+                       //String opponent = (doc.get("Player1").toString().equals(username)) ?
+                       //       doc.get("Player2").toString() :
+                       //       doc.get("Player1").toString();
+                       //intent.putExtra("username",username);
+                       //intent.putExtra("opponent",opponent);
+                   }
+               }
             }
         });
 
@@ -84,7 +100,7 @@ public class QR extends AppCompatActivity {
     View.OnClickListener openQrCamera = new View.OnClickListener(){
         public void onClick (View v) {
             Intent intent = new Intent(v.getContext(), BarcodeReaderActivity.class);
-            intent.putExtra("username",username);
+            intent.putExtra("username",getIntent().getStringExtra("username"));
             startActivity(intent);
         }
     };
