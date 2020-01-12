@@ -36,6 +36,16 @@ public class User {
         db.collection("Users").document(fname).set(this);
     }
 
+    public User(String fname, String lname, String username, String email, String pw){
+        this.fname = fname;
+        this.lname = lname;
+        this.username = username;
+        this.email = email;
+        this.password = pw;
+        points = 0;
+        games = new ArrayList<Game_type>();
+    }
+
     public void addGame(Game_type g){
         games.add(g);
         g.addUser(this);

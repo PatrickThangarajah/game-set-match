@@ -41,6 +41,6 @@ public class BarcodeReaderActivity extends Activity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result rawResult) {
-        // barcode text = rawResult.getText();
+
     }
 }
