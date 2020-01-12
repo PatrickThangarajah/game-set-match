@@ -1,6 +1,20 @@
 package com.example.game_set_match;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import static android.content.ContentValues.TAG;
 
 public class User {
     private String fname;
@@ -11,7 +25,7 @@ public class User {
     private int points;
     private ArrayList<Game_type> games;
 
-    public User(String fname, String lname, String username, String email, String pw){
+    public User(String fname, String lname, String username, String email, String pw, FirebaseFirestore db){
         this.fname = fname;
         this.lname = lname;
         this.username = username;
@@ -19,6 +33,7 @@ public class User {
         this.password = pw;
         points = 0;
         games = new ArrayList<Game_type>();
+        db.collection("Users").document(fname).set(this);
     }
 
     public void addGame(Game_type g){

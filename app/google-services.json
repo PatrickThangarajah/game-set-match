@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "267128978165-5k1puv5seqr3qthoiig0jag85of26pfj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.game_set_match",
+            "certificate_hash": "e976aa7ee74cb17d5fe4f982e339ee6ab82fc7d9"
+          }
+        },
+        {
           "client_id": "267128978165-g1et24pjjdl46lvifavdurfrsjesc653.apps.googleusercontent.com",
           "client_type": 3
         }

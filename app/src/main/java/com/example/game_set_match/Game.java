@@ -34,7 +34,7 @@ public class Game {
         this.StartTime = Calendar.getInstance().getTime();
         this.player1 = player1;
         this.player2 = player2;
-        this.winner = new User();
+        //this.winner = new User();
         this.GameOver = false;
 
 
@@ -50,8 +50,8 @@ public class Game {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("StartTime", Calendar.getInstance().getTime());
         parameters.put("GameId", GameId);
-        parameters.put("Player1", player1.username);
-        parameters.put("Player2", player2.username);
+        //parameters.put("Player1", player1.username);
+        //parameters.put("Player2", player2.username);
         parameters.put("Game Over", GameOver);
 
         Start.collection("Active_Games").document(Integer.toString(GameId)).set(parameters)

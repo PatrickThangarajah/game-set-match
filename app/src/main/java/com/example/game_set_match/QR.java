@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.ImageView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -41,12 +43,12 @@ public class QR extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
 
-        newUser user = new newUser(); // get logged in user;
-        user.username = "test"; // placeholder
+        User user = new User("","","","","", FirebaseFirestore.getInstance()); // get logged in user;
+        user.setUsername("test"); // placeholder
 
         ImageView qrImageView = findViewById(R.id.ImageView_QR);
         // load QR code (google API) into View
-        Picasso.get().load(GetQrApiUrl(user.username)).into(qrImageView);
+        Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
         // Add click listener
         qrImageView.setOnClickListener(openQrCamera);
     }

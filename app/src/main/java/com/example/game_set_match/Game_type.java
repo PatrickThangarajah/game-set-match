@@ -1,5 +1,12 @@
 package com.example.game_set_match;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -7,16 +14,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.content.ContentValues.TAG;
+
 public class Game_type {
 
     private String name;
-    private FirebaseFirestore db;
     private ArrayList<User> listOfUsers;
 
-    public Game_type(String name, FirebaseFirestore db){
+    public Game_type(String name, String doc, FirebaseFirestore db){
         this.name = name;
-        this.db = db;
-        this.db.collection("GameType").add(this);
+        listOfUsers = new ArrayList<User>();
+        db.collection("GameType").document(doc).set(this);
     }
 
 
