@@ -20,6 +20,7 @@ public class Game_type {
     private List<User> listOfUsers;
 
     public Game_type(String doc, FirebaseFirestore db){
+        //if (db.collection("GameType").document(doc).get())
         listOfUsers = (List<User>) db.collection("GameType").document(doc).get();
         db.collection("GameType").document(doc).set(this);
     }
