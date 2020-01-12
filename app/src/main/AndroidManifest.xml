@@ -26,4 +26,7 @@
         </activity>
     </application>
 
+    Uri uri=Uri.parse("R.drawable.screenshot");
+
+
 </manifest>
