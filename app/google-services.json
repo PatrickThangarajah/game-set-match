@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "267128978165",
+    "firebase_url": "https://game-set-match-nosql.firebaseio.com",
+    "project_id": "game-set-match-nosql",
+    "storage_bucket": "game-set-match-nosql.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267128978165:android:a9702ac6294bfad718e3bc",
+        "android_client_info": {
+          "package_name": "com.example.game_set_match"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267128978165-g1et24pjjdl46lvifavdurfrsjesc653.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlM9e9SOM2Dg4e2TGMbyiLBRFmLag_DyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267128978165-g1et24pjjdl46lvifavdurfrsjesc653.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

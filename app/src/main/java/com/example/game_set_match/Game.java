@@ -1,12 +1,16 @@
 package com.example.game_set_match;
 
-import java.time.*;
-import java.time.LocalDateTime;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
     private int gameId;
-    private LocalDateTime StartTime;
-    private LocalDateTime endTime;
+    private Date StartTime;
+    private Date endTime;
     private newUser player1;
     private newUser player2;
     private newUser winner;
@@ -18,7 +22,7 @@ public class Game {
 
     public void StartGame(newUser player1, newUser player2) {
         this.gameId = 1; // generate game ID
-        this.StartTime = LocalDateTime.now();
+        this.StartTime = Calendar.getInstance().getTime();
         this.player1 = player1;
         this.player2 = player2;
         this.winner = new newUser();
@@ -30,6 +34,22 @@ public class Game {
         // this.player1.username;
         // this.player2.username;
         // this.GameOver;
+
+    }
+
+    public void EndGame(int gid) {
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("GameOver",true);
+        params.put("EndTime",Calendar.getInstance().getTime());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        //db.collection("Active Games")
+
+    }
+
+    public void SetWinner(int gameId,String winner) {
 
     }
 }
