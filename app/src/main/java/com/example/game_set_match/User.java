@@ -8,7 +8,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    public ArrayList<Game> games;
+    public ArrayList<Game_type> games;
 
     public User(String fname, String lname, String username, String email, String pw){
         this.fname = fname;
@@ -16,14 +16,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = pw;
-        games = new ArrayList<Game>();
+        games = new ArrayList<Game_type>();
     }
 
-    public void addGame(Game g){
+    public void addGame(Game_type g){
         games.add(g);
     }
 
-    public void removeGame(Game g){
+    public void removeGame(Game_type g){
         games.remove(g);
     }
 
@@ -52,5 +52,5 @@ public class User {
     public String getLastname(){return lname;}
     public String getUsername(){return username;}
     public String getEmail(){return email;}
-    public ArrayList<Game> getGames(){return games;}
+    public ArrayList<Game_type> getGames(){return games;}
 }

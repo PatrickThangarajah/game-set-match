@@ -3,13 +3,13 @@ package com.example.game_set_match;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Game_type {
 
     private String name;
     private List leaderboard;
     private List<User> users;
 
-    public Game (String name, List leaderboard){
+    public Game_type(String name, List leaderboard){
         this.name = name;
         this.leaderboard = leaderboard;
         users = new ArrayList<>();
