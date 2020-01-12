@@ -24,6 +24,7 @@ public class Ending_MatchScreen extends AppCompatActivity {
 
         public void goToQR () {
         Intent intent = new Intent(getApplicationContext(), QR.class);
+        intent.putExtra("username",getIntent().getStringExtra("username"));
         startActivity(intent);
     }
 }

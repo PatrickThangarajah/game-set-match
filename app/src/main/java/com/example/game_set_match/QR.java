@@ -75,12 +75,12 @@ public class QR extends AppCompatActivity {
                    if (doc.get("Player1").toString().equals(username) ||
                        doc.get("Player2").toString().equals(username)
                    ){
-                       //Intent intent = new Intent(this,Ending_MatchScreen.class);
-                       //String opponent = (doc.get("Player1").toString().equals(username)) ?
-                       //       doc.get("Player2").toString() :
-                       //       doc.get("Player1").toString();
-                       //intent.putExtra("username",username);
-                       //intent.putExtra("opponent",opponent);
+                       Intent intent = new Intent(getApplicationContext(),Ending_MatchScreen.class);
+                       String opponent = (doc.get("Player1").toString().equals(username)) ?
+                              doc.get("Player2").toString() :
+                              doc.get("Player1").toString();
+                       intent.putExtra("username",username);
+                       intent.putExtra("opponent",opponent);
                    }
                }
             }
