@@ -14,6 +14,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class BarcodeReaderActivity extends Activity implements ZXingScannerView.ResultHandler {
 
+    private String username;
     private ZXingScannerView scannerView;
     private static String TAG = "BarcodeReaderActivity";
 
@@ -23,7 +24,7 @@ public class BarcodeReaderActivity extends Activity implements ZXingScannerView.
 
         scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
-
+        this.username = getIntent().getStringExtra("username");
     }
 
     @Override
@@ -41,6 +42,6 @@ public class BarcodeReaderActivity extends Activity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result rawResult) {
-
+        new Game().StartGame(this.username,rawResult.toString());
     }
 }

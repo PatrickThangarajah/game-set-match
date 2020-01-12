@@ -18,6 +18,7 @@ import java.util.Map;
 
 public class QR extends AppCompatActivity {
 
+    private String username;
     private String GetQrApiUrl(String username) {
         return GetQrApiUrl(username,500,500);
     }
@@ -52,7 +53,7 @@ public class QR extends AppCompatActivity {
         qrImageView.setOnClickListener(openQrCamera);
         // load QR code (google API) into View
 
-
+        this.username = username;
 
 
         db.collection("Users")
@@ -83,6 +84,7 @@ public class QR extends AppCompatActivity {
     View.OnClickListener openQrCamera = new View.OnClickListener(){
         public void onClick (View v) {
             Intent intent = new Intent(v.getContext(), BarcodeReaderActivity.class);
+            intent.putExtra("username",username);
             startActivity(intent);
         }
     };
