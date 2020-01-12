@@ -29,8 +29,7 @@ public class Game {
         // this.StartTime;
         // this.player1.username;
         // this.player2.username;
-        // this.GameOver = true;
-        // this.EndTime = null;
+        // this.GameOver;
 
     }
 }
