@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseFirestore GameType = FirebaseFirestore.getInstance();
+    FirebaseFirestore UserList = FirebaseFirestore.getInstance();
 
 
     @Override

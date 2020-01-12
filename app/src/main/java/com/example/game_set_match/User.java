@@ -1,5 +1,7 @@
 package com.example.game_set_match;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class User {
@@ -11,13 +13,14 @@ public class User {
     private int points;
     private ArrayList<Game_type> games;
 
-    public User(String fname, String lname, String username, String email, String pw){
+    public User(String fname, String lname, String username, String email, String pw, FirebaseFirestore db){
         this.fname = fname;
         this.lname = lname;
         this.username = username;
         this.email = email;
         this.password = pw;
         points = 0;
+        db.collection("Users").add(this);
         games = new ArrayList<Game_type>();
     }
 
