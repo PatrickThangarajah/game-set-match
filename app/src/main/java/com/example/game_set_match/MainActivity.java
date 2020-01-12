@@ -1,6 +1,8 @@
 package com.example.game_set_match;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         initialize();
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(this,QR.class);
+        startActivity(intent);
+
     }
 
     public void initialize(){
