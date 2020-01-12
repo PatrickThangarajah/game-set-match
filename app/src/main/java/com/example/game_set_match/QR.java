@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.ImageView;
-
-import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -55,7 +53,7 @@ public class QR extends AppCompatActivity {
 
     View.OnClickListener openQrCamera = new View.OnClickListener(){
         public void onClick (View v) {
-            Intent intent = new Intent(this, BarcodeReaderActivity.class);
+            Intent intent = new Intent(v.getContext(), BarcodeReaderActivity.class);
             startActivity(intent);
         }
     };

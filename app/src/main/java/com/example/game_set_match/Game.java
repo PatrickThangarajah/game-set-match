@@ -40,11 +40,11 @@ public class Game {
 
 
         // figure out how to store this into a new document on firebase;
-        // this.gameId;
-        // this.StartTime;
-        // this.player1.username;
-        // this.player2.username;
-        // this.GameOver;
+        // this.gameId = -1;
+        // this.StartTime = ;
+        // this.player1.username = "a";
+        // this.player2.username = "b";
+        // this.GameOver = false;
 
         FirebaseFirestore Start = FirebaseFirestore.getInstance();
         Map<String, Object> parameters = new HashMap<>();
