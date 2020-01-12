@@ -19,22 +19,22 @@ public class Game {
     private int GameId;
     private Date StartTime;
     private Date endTime;
-    private newUser player1;
-    private newUser player2;
-    private newUser winner;
+    private User player1;
+    private User player2;
+    private User winner;
     private boolean GameOver;
 
     public Game() {
         // empty constructor
     }
 
-    public void StartGame(newUser player1, newUser player2) {
+    public void StartGame(User player1, User player2) {
 
         this.GameId = 1; // generate game ID
         this.StartTime = Calendar.getInstance().getTime();
         this.player1 = player1;
         this.player2 = player2;
-        this.winner = new newUser();
+        this.winner = new User();
         this.GameOver = false;
 
 
