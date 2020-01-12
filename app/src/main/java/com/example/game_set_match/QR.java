@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
@@ -42,15 +44,37 @@ public class QR extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        User user = new User("","","","","", FirebaseFirestore.getInstance()); // get logged in user;
-        user.setUsername("test"); // placeholder
 
-        ImageView qrImageView = findViewById(R.id.ImageView_QR);
-        // load QR code (google API) into View
-        Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
-        // Add click listener
+        // placeholder
+        String username = "user1";
+
+        final ImageView qrImageView = findViewById(R.id.ImageView_QR);
         qrImageView.setOnClickListener(openQrCamera);
+        // load QR code (google API) into View
+        db.collection("Users")
+                .document(username)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = docToUser(documentSnapshot);
+                Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
+
+            }
+        });
+        //Picasso.get().load(GetQrApiUrl(user.getUsername())).into(qrImageView);
+        // Add click listener
+    }
+
+    private User docToUser(DocumentSnapshot d) {
+        return new User(
+                d.get("fname").toString(),
+                d.get("lname").toString(),
+                d.get("username").toString(),
+                d.get("email").toString(),
+                d.get("pw").toString());
     }
 
     View.OnClickListener openQrCamera = new View.OnClickListener(){

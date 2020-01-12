@@ -23,8 +23,6 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
         initialize();
         setContentView(R.layout.signinfrontend);
 
-        Intent intent = new Intent(this,QR.class);
-        startActivity(intent);
         setContentView(R.layout.signinfrontend);
         signin =(Button) findViewById(R.id.sign_in);
         signin.setOnClickListener(new View.OnClickListener() {
